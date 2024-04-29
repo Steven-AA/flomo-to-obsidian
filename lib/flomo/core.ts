@@ -69,6 +69,8 @@ export class FlomoCore {
         memoNodes.forEach(i => {
             const dateTime = i.querySelector(".time").textContent;
             const title = extrtactTitle(dateTime);
+            const formattedDateTime = dateTimeStr.replace(/-/g, '/');
+            const memoId = "how_to_get_memooId";
 
             // @Mar-31, 2024 Fix: #20 - Support <mark>.*?<mark/>
             const contentBody = i.querySelector(".content").innerHTML.replaceAll("<mark>", "FLOMOIMPORTERHIGHLIGHTMARKPLACEHOLDER").replaceAll("</mark>", "FLOMOIMPORTERHIGHLIGHTMARKPLACEHOLDER");
@@ -79,7 +81,7 @@ export class FlomoCore {
             res.push({
                 "title": title,
                 "date": dateTime.split(" ")[0],
-                "content": "📅 [[" + dateTime.split(" ")[0] + "]]"+ " " + dateTime.split(" ")[1] + "\n\n" + content,
+                "content": "---\nid:"+  +"\ncreatedAt:"+ formattedDateTime +"---\n\n📅 [[" + dateTime.split(" ")[0] + "]]"+ " " + dateTime.split(" ")[1] + "\n\n" + content,
             })
 
         });
